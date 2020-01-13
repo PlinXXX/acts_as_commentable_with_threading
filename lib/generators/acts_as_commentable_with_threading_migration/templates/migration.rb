@@ -1,10 +1,12 @@
-class ActsAsCommentableWithThreadingMigration < ActiveRecord::Migration
+class ActsAsCommentableWithThreadingMigration < ActiveRecord::Migration[6.0]
   def self.up
     create_table :comments, force: true do |t|
       t.integer :commentable_id
       t.string :commentable_type
       t.string :title
       t.text :body
+      t.text :pos_body, default: "Write your very nice comment here..."
+      t.text :neg_body, default: "And here the others"
       t.string :subject
       t.integer :user_id, null: false
       t.integer :parent_id, :lft, :rgt
